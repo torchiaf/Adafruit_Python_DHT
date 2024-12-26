@@ -86,7 +86,7 @@ def pi_version():
     """
     
     if os.environ.get('RASPBERRYPI_VERSION') is not None:
-        return os.environ.get('RASPBERRYPI_VERSION')
+        return int(os.environ.get('RASPBERRYPI_VERSION'))
     
     # Check /proc/cpuinfo for the Hardware field value.
     # 2708 is pi 1

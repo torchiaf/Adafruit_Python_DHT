@@ -44,6 +44,7 @@ def get_platform():
     if plat == platform_detect.RASPBERRY_PI:
         # Check for version 1 or 2 of the pi.
         version = platform_detect.pi_version()
+        
         if version == 1:
             from . import Raspberry_Pi
             return Raspberry_Pi
