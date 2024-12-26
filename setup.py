@@ -38,6 +38,10 @@ elif '--force-pi2' in sys.argv:
     platform = platform_detect.RASPBERRY_PI
     pi_version = 2
     sys.argv.remove('--force-pi2')
+elif '--force-pi3' in sys.argv:
+    platform = platform_detect.RASPBERRY_PI
+    pi_version = 3
+    sys.argv.remove('--force-pi3')
 elif '--force-bbb' in sys.argv:
     platform = platform_detect.BEAGLEBONE_BLACK
     sys.argv.remove('--force-bbb')
