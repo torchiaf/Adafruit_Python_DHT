@@ -24,6 +24,7 @@
 # TODO: Add dependency on Adafruit Python GPIO and use its platform detect
 # functions.
 
+import os
 import platform
 import re
 
@@ -83,6 +84,10 @@ def pi_version():
     Raspberry Pi 2 (model B+), Raspberry Pi 3,Raspberry Pi 3 (model B+), Raspberry Pi 4
     or not a Raspberry Pi.
     """
+    
+    if os.environ.get('RASPBERRYPI_VERSION') is not None:
+        return os.environ.get('RASPBERRYPI_VERSION')
+    
     # Check /proc/cpuinfo for the Hardware field value.
     # 2708 is pi 1
     # 2709 is pi 2
@@ -92,8 +97,7 @@ def pi_version():
     with open('/proc/cpuinfo', 'r') as infile:
         cpuinfo = infile.read()
     # Match a line like 'Hardware   : BCM2709'
-    match = re.search('^Hardware\s+:\s+(\w+)$', cpuinfo,
-                      flags=re.MULTILINE | re.IGNORECASE)
+    match = re.search('^Hardware\s+:\s+(\w+)$', cpuinfo, flags=re.MULTILINE | re.IGNORECASE)
     if not match:
         # Couldn't find the hardware, assume it isn't a pi.
         return None
